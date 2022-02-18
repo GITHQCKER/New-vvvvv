@@ -19,14 +19,14 @@ const Lang = Language.getString('scrapers');
   var random_api = Math.floor(4*Math.random())
 
 
-AlphaX.addCommand({pattern: 'playmp3 ?(.*)', fromMe: WType, desc: Lang.SONG_DESC}, (async (message, match) => {
+AlphaX.addCommand({pattern: 'song ?(.*)', fromMe: WType, desc: Lang.SONG_DESC}, (async (message, match) => {
 
         const ppurl = await message.client.getProfilePicture(message.jid)
         let PIC
         try { PIC = await axios.get(`${config.A_PIC}`, {responseType: 'arraybuffer'}) } catch { PIC = await axios.get(ppurl, {responseType : 'arraybuffer'}) }
 
      if (match[1] === '') {
-     await message.client.sendMessage(message.jid,Lang.NEED_TEXT_SONG,MessageType.text, {quoted: message.data, contextInfo: { forwardingScore: 49, isForwarded: false }, quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(message.jid ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "📎 Need Song! 📎", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": Buffer.from(PIC.data)}}}});
+     await message.client.sendMessage(message.jid,Lang.NEED_TEXT_SONG,MessageType.text);
      };
       
      let run;
@@ -60,40 +60,39 @@ AlphaX.addCommand({pattern: 'playmp3 ?(.*)', fromMe: WType, desc: Lang.SONG_DESC
 
      var dpic = await axios.get(`${config.D_SONG_PIC}`, {responseType: 'arraybuffer'});
 
-          await message.client.sendMessage(message.jid, Buffer.from(dpic.data), MessageType.image, { mimetype: Mimetype.png, caption: config.D_SONG, thumbnail: Buffer.from(dpic.data), contextInfo: { forwardingScore: 49, isForwarded: false }, quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(message.jid ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": '📩 Dᴏᴡɴʟᴏᴀᴅɪɴɢ 📩', "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": Buffer.from(PIC.data)}}}});
+          await message.client.sendMessage(message.jid, Buffer.from(dpic.data), MessageType.image);
 
      var pp = await axios.get(`${thumb}`, {responseType: 'arraybuffer'})
      
-          await message.client.sendMessage(message.jid, Buffer.from(pp.data), MessageType.image, { mimetype: Mimetype.png, caption: msg + config.U_SONG, thumbnail: Buffer.from(pp.data), contextInfo: { forwardingScore: 49, isForwarded: false }, quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(message.jid ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": '📤 ' + match[1] + ' 📤', "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": Buffer.from(PIC.data)}}}});
-
+          await message.client.sendMessage(message.jid, Buffer.from(pp.data), MessageType.image);
+       
      var song = await axios.get( url , {responseType: 'arraybuffer' })
 
-      } catch { down = false; await message.client.sendMessage(message.jid, Lang.NO_RESULT, MessageType.text, { quoted: message.data, contextInfo: { forwardingScore: 49, isForwarded: false }, quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(message.jid ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "🚫 No results found!", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": Buffer.from(PIC.data)}}}}); };
-
+      } catch { down = false; await message.client.sendMessage(message.jid, Lang.NO_RESULT, MessageType.text);
       if (down == true) { /* If file is up to 100mb it send a error msg ✅ */
 
           try { 
           await message.client.sendMessage(message.jid, Buffer.from(song.data) , MessageType.audio, { mimetype: 'audio/mpeg',quoted: message.data, ptt: false});
           await message.client.sendMessage(message.jid, Buffer.from(song.data) , MessageType.document, {filename: response.data.result.title + '.mp3', mimetype: 'audio/mpeg', quoted: message.data});
-          } catch { await message.client.sendMessage(message.jid, "*🚫 ᴄᴀɴ'ᴛ ᴜᴘʟᴏᴀᴅ ᴜᴘ ᴛᴏ* _100MB_ *ғɪʟᴇs*", MessageType.text, { quoted: message.data }); };
+          } catch { await message.client.sendMessage(message.jid, "*🚫  _100MB_", MessageType.text, { quoted: message.data }); };
 
               };
               
          });
 
-    } else if (run == false) { /* site is down now */ await message.client.sendMessage(message.jid, "*:( sᴇʀᴠᴇʀ ᴇʀʀᴏʀ !!* ```ᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ʟᴀᴛᴇʀ..```\n• *ᴜsᴇ ᴛʜᴇ* _[music or song]_ *ᴄᴏᴍᴍᴀɴᴅ ᴜɴᴛɪʟ ᴛʜɪs sɪᴛᴜᴀᴛɪᴏɴ ɪs ʀᴇsᴏʟᴠᴇᴅ*" ,MessageType.text, {quoted: message.data, contextInfo: { forwardingScore: 49, isForwarded: false }, quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(message.jid ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "⚠️️ server error.", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": Buffer.from(PIC.data)}}}}); };
+    } else if (run == false) { /* site is down now */ await message.client.sendMessage(message.jid, "*:( 𝙀𝙍𝙍𝙊𝙍!!* ```𝙏𝙍𝙔 𝘼𝙂𝘼𝙄𝙉..```\n• *ᴜsᴇ ᴛʜᴇ* _[music or song]_ *ᴄᴏᴍᴍᴀɴᴅ ᴜɴᴛɪʟ ᴛʜɪs sɪᴛᴜᴀᴛɪᴏɴ ɪs ʀᴇsᴏʟᴠᴇᴅ*" ,MessageType.text, {quoted: message.data, contextInfo: { forwardingScore: 49, isForwarded: false }, quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(message.jid ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "⚠️️ server error.", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": Buffer.from(PIC.data)}}}}); };
 
 }));
 
-AlphaX.addCommand({pattern: 'playmp4 ?(.*)', fromMe: WType, desc: Lang.VIDEO_DESC}, (async (message, match) => {
+AlphaX.addCommand({pattern: 'video ?(.*)', fromMe: WType, desc: Lang.VIDEO_DESC}, (async (message, match) => {
 
         const ppurl = await message.client.getProfilePicture(message.jid)
         let PIC
         try { PIC = await axios.get(`${config.A_PIC}`, {responseType: 'arraybuffer'}) } catch { PIC = await axios.get(ppurl, {responseType : 'arraybuffer'}) }
 
      if (match[1] === '') {
-          await message.client.sendMessage(message.jid, '🔭 *ɴᴇᴇᴅ ɴᴀᴍᴇ ᴏʀ ᴜʀʟ!*\n_ex:- .video https://youtu.be/c9rRLLdNTVQ_\n._video Telegram Bot @Anything SL_' ,MessageType.text, {quoted: message.data, contextInfo: { forwardingScore: 49, isForwarded: false }, quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(message.jid ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "📎 Need yt video name or url 📎", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": Buffer.from(PIC.data)}}}});
-                          };
+          await message.client.sendMessage(message.jid, '🔭 *ɴᴇᴇᴅ ɴᴀᴍᴇ ᴏʀ ᴜʀʟ!*\n_ex:- .video https://youtu._\n._video Telegram Bot @Anything SL_' ,MessageType.text);
+       
 
      let run;
      try { await axios.get('https://api.zeks.me/api/ytplaymp4?apikey=' + `${api_key[random_api]}` + '&q=' + match[1] ); run = true } catch { run = false };
@@ -125,16 +124,16 @@ AlphaX.addCommand({pattern: 'playmp4 ?(.*)', fromMe: WType, desc: Lang.VIDEO_DES
 
      var dpic = await axios.get(`${config.D_VIDEO_PIC}`, {responseType: 'arraybuffer'})
         
-          await message.client.sendMessage(message.jid, Buffer.from(dpic.data), MessageType.image, { mimetype: Mimetype.png, caption: config.D_VIDEO, thumbnail: Buffer.from(dpic.data), contextInfo: { forwardingScore: 49, isForwarded: false }, quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(message.jid ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": '📩 Dᴏᴡɴʟᴏᴀᴅɪɴɢ 📩', "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": Buffer.from(PIC.data)}}}});
-
+          await message.client.sendMessage(message.jid, Buffer.from(dpic.data), MessageType.image);
+       
      var pp = await axios.get(`${thumb}`, {responseType: 'arraybuffer'})
 
-          await message.client.sendMessage(message.jid, Buffer.from(pp.data), MessageType.image, { mimetype: Mimetype.png, caption: msg + config.U_VIDEO, thumbnail: Buffer.from(pp.data), contextInfo: { forwardingScore: 49, isForwarded: false }, quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(message.jid ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": '📤 ' + match[1] + ' 📤', "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": Buffer.from(PIC.data)}}}});
-
+          await message.client.sendMessage(message.jid, Buffer.from(pp.data), MessageType.image);
+       
      var vid = await axios.get( url , {responseType: 'arraybuffer' })
 
-      } catch { down = false; await message.client.sendMessage(message.jid, Lang.NO_RESULT, MessageType.text, { quoted: message.data, contextInfo: { forwardingScore: 49, isForwarded: false }, quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(message.jid ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "🚫 No results found!", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": Buffer.from(PIC.data)}}}}); };
-
+      } catch { down = false; await message.client.sendMessage(message.jid, Lang.NO_RESULT, MessageType.text(;
+                                                                                                             
       if (down == true) { /* If file is up to 100mb it send a error msg ✅ */
 
           try {
@@ -145,9 +144,7 @@ AlphaX.addCommand({pattern: 'playmp4 ?(.*)', fromMe: WType, desc: Lang.VIDEO_DES
           
          });
 
-    } else if (run == false) { /* site is down now */ await message.client.sendMessage(message.jid, "*:( sᴇʀᴠᴇʀ ᴇʀʀᴏʀ !!* ```ᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ʟᴀᴛᴇʀ..```\n• *ᴜsᴇ ᴛʜᴇ* _[mp4 or video]_ *ᴄᴏᴍᴍᴀɴᴅ ᴜɴᴛɪʟ ᴛʜɪs sɪᴛᴜᴀᴛɪᴏɴ ɪs ʀᴇsᴏʟᴠᴇᴅ*" ,MessageType.text, {quoted: message.data, contextInfo: { forwardingScore: 49, isForwarded: false }, quoted: { key: { fromMe: false, participant: `0@s.whatsapp.net`, ...(message.jid ? { remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc", "mimetype": "image/jpeg", "caption": "⚠️️ server error.", "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=", "fileLength": "28777", "height": 1080, "width": 1079, "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=", "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=", "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69", "mediaKeyTimestamp": "1610993486", "jpegThumbnail": Buffer.from(PIC.data)}}}}); };
-
-}));
+    } else if (run == false) { /* site is down now */ await message.client.sendMessage(message.jid, "*:( sᴇʀᴠᴇʀ ᴇʀʀᴏʀ !!* ```ᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ʟᴀᴛᴇʀ..```\n• *ᴜsᴇ ᴛʜᴇ* _[mp4 or video]_ *ᴄᴏᴍᴍᴀɴᴅ ᴜɴᴛɪʟ ᴛʜɪs sɪᴛᴜᴀᴛɪᴏɴ ɪs ʀᴇsᴏʟᴠᴇᴅ*" ,MessageType.text);
 
 var DESC = ""
 if (config.LANG == "EN") DESC = "ᴅᴏᴡɴʟᴏᴀᴅ video from facebook."
