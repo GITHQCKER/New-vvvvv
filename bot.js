@@ -20,7 +20,7 @@ const config = require('./config');
 
 const {WAConnection, MessageOptions, MessageType, Mimetype, Presence} = require('@adiwajshing/baileys');
 
-const {Message, StringSession, Image, Video} = require('./imashbase/');
+const {Message, StringSession, Image, Video} = require('./alphaX/');
 
 const { DataTypes } = require('sequelize');
 
